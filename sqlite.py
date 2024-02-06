@@ -54,4 +54,9 @@ def delete_user(user_id):
     conn.close()
 
     return redirect(url_for('index'))
+# Ruta para actualizar un usuario
+@app.route('/update/<int:user_id>', methods=['POST'])
+def update_user(user_id):
+    new_username = request.form['new_username']
+    new_email = request.form['new_email']
 
