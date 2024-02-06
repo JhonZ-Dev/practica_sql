@@ -9,3 +9,16 @@ DATABASE = 'database.db'
 # Función para conectarse a la base de datos
 def connect_db():
     return sqlite3.connect(DATABASE)
+# Función para crear la tabla de usuarios
+def create_table():
+    conn = connect_db()
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT NOT NULL,
+            email TEXT NOT NULL
+        )
+    ''')
+    conn.commit()
+    conn.close()
