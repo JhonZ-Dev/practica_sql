@@ -64,4 +64,5 @@ def update_user(user_id):
     cursor.execute('UPDATE users SET username = ?, email = ? WHERE id = ?', (new_username, new_email, user_id))
     conn.commit()
     conn.close()
+    return redirect(url_for('index'))
 
