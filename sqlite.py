@@ -31,3 +31,16 @@ def index():
     users = cursor.fetchall()
     conn.close()
     return render_template('index.html', users=users)
+# Ruta para agregar un nuevo usuario
+@app.route('/add', methods=['POST'])
+def add_user():
+    username = request.form['username']
+    email = request.form['email']
+
+    conn = connect_db()
+    cursor = conn.cursor()
+    cursor.execute('INSERT INTO users (username, email) VALUES (?, ?)', (username, email))
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for('index'))
