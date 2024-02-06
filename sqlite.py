@@ -22,3 +22,12 @@ def create_table():
     ''')
     conn.commit()
     conn.close()
+# Ruta para mostrar la lista de usuarios
+@app.route('/')
+def index():
+    conn = connect_db()
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM users')
+    users = cursor.fetchall()
+    conn.close()
+    return render_template('index.html', users=users)
