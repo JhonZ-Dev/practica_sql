@@ -44,3 +44,14 @@ def add_user():
     conn.close()
 
     return redirect(url_for('index'))
+# Ruta para eliminar un usuario
+@app.route('/delete/<int:user_id>')
+def delete_user(user_id):
+    conn = connect_db()
+    cursor = conn.cursor()
+    cursor.execute('DELETE FROM users WHERE id = ?', (user_id,))
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for('index'))
+
