@@ -59,4 +59,9 @@ def delete_user(user_id):
 def update_user(user_id):
     new_username = request.form['new_username']
     new_email = request.form['new_email']
+    conn = connect_db()
+    cursor = conn.cursor()
+    cursor.execute('UPDATE users SET username = ?, email = ? WHERE id = ?', (new_username, new_email, user_id))
+    conn.commit()
+    conn.close()
 
